@@ -19,8 +19,8 @@ var gnd_idx := -1
 var vcc_idx := -1
 
 
-func load_ini(path: String) -> void:
-	config.load(path)
+func load(cfg: String) -> void:
+	config.load("res://integrations/" + cfg + ".ini")
 
 	# The first section contains the name of the device.
 	name = config.get_sections()[0]

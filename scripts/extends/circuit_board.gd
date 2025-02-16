@@ -38,11 +38,15 @@ func _process(delta: float) -> void:
 		temp_conn.remove_point(1)
 		temp_conn.add_point(mouse_pos, 1)
 
-	## devices (ICs, LEDs, etc.) will accept inputs
-	## devices (ICs, LEDs, etc.) will process
+	# Clear signal set flag of all pins.
+	for pin in $"/root/Node2D/Control/PinGrid".get_children():
+		if pin is Pin:
+			pin.sig_set = false
 
-	# Clear all wire signals.
-	for conn in conns:
-		conn.sig = SIG_UNKNOWN
+	## devices (ICs, LEDs, etc.) will input
+	## devices (ICs, LEDs, etc.) will output
 
-	## load device output to wires and propogate them
+	## load device output to wires and propagate them
+	for pin in $"/root/Node2D/Control/PinGrid".get_children():
+		if pin is Pin:
+			pin.set_sig(pin.sig)
