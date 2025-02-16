@@ -6,6 +6,7 @@ const SIG_HI := ~0
 const SIG_UNKNOWN := 1
 
 var config = ConfigFile.new()
+var top_left_pin = Vector2i(0, 0)
 
 var description := ""
 var pin_names := []
@@ -33,9 +34,9 @@ func load_ini(path: String) -> void:
 		)
 		if pname == null:
 			break
-		if pname == "VCC":
+		elif pname == "VCC":
 			vcc_idx = len(pin_names)
-		if pname == "GND":
+		elif pname == "GND":
 			gnd_idx = len(pin_names)
 		pin_names.append(pname)
 		pin_signals.append(SIG_UNKNOWN)
@@ -53,10 +54,12 @@ func process_inputs() -> void:
 		return
 	for key in config.get_section_keys(name + ".logic"):
 		var value = config.get_value(name + ".logic", key)
+		var value_args = Array(value.split(" ", false))
 
 		var out_arr: Array
 		var out_idx: int
 
+		# Get the array element which will store the result.
 		if key.begins_with("p"):  # pins
 			out_arr = pin_signals
 			out_idx = key.trim_prefix("p").to_int() - 1
@@ -64,36 +67,34 @@ func process_inputs() -> void:
 			out_arr = gpr
 			out_idx = key.trim_prefix("r").to_int()
 
-		var value_args = value.split(" ", false)
-		var operator := ""
-		var operands := []
-		
-		for arg in value_args:
+		# Replace pins and registers with their respective values.
+		for i in range(0, len(value_args)):
+			var arg = value_args[i]
 			if arg.begins_with("p"):  # pins
-				operands.append(pin_signals[arg.trim_prefix("p").to_int() - 1])
+				value_args[i] = pin_signals[arg.trim_prefix("p").to_int() - 1]
 			elif arg.begins_with("r"):  # registers
-				operands.append(gpr[arg.trim_prefix("r").to_int()])
-			elif not operator:
-				operator = arg
-		
-		if operator == "~":
-			out_arr[out_idx] = ~operands[0]
-		elif operator == "&":
-			out_arr[out_idx] = operands[0] & operands[1]
-		elif operator == "|":
-			out_arr[out_idx] = operands[0] | operands[1]
-		elif operator == "^":
-			out_arr[out_idx] = operands[0] ^ operands[1]
-		elif operator == "~&":
-			out_arr[out_idx] = ~(operands[0] & operands[1])
-		elif operator == "~|":
-			out_arr[out_idx] = ~(operands[0] | operands[1])
-		elif operator == "~^":
-			out_arr[out_idx] = ~(operands[0] ^ operands[1])
+				value_args[i] = gpr[arg.trim_prefix("r").to_int()]
 
-func _ready() -> void:
-	pass # Replace with function body.
+		# Evaluate the prefix expression.
+		for i in range(len(value_args) - 1, -1, -1):
+			if value_args[i] is not String:
+				continue
+			if value_args[i] == "NOT":
+				value_args[i] = ~value_args[i + 1]
+				value_args.remove_at(i + 1)
+			elif value_args[i] == "AND":
+				value_args[i] = value_args[i + 1] & value_args[i + 2]
+				value_args.remove_at(i + 1)
+				value_args.remove_at(i + 1)
+			elif value_args[i] == "OR":
+				value_args[i] = value_args[i + 1] | value_args[i + 2]
+				value_args.remove_at(i + 1)
+				value_args.remove_at(i + 1)
+			elif value_args[i] == "XOR":
+				value_args[i] = value_args[i + 1] ^ value_args[i + 2]
+				value_args.remove_at(i + 1)
+				value_args.remove_at(i + 1)
 
-
-func _process(delta: float) -> void:
-	pass
+		# Only one element (that is, the result) should be left.
+		assert(len(value_args) == 1)
+		out_arr[out_idx] = value_args[0]

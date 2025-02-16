@@ -45,7 +45,3 @@ func _ready() -> void:
 	epoint2.add_point(p2_global - Vector2i(1, 0))
 	epoint2.add_point(p2_global + Vector2i(1, 0))
 	add_child(epoint2)
-
-
-func _process(delta: float) -> void:
-	pass

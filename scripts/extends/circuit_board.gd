@@ -10,7 +10,7 @@ const SIG_UNKNOWN = 1
 @onready var temp_conn_owner_coords := Vector2i(-1, -1)
 
 var conns: Array[WireConn] = []
-
+var devs: Array[CircuitDevice] = []
 
 func join(p1: Vector2i, p2: Vector2i) -> void:
 	if p1 == p2:
@@ -30,24 +30,6 @@ func _ready() -> void:
 	temp_conn.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	temp_conn.end_cap_mode = Line2D.LINE_CAP_ROUND
 	add_child(temp_conn)
-	
-	# temp: create an simple device
-	var idk := CircuitDevice.new()
-	idk.load_ini("res://integrations/7404.ini")
-	add_child(idk)
-
-	# vcc gnd
-	idk.pin_signals[6] = SIG_LO
-	idk.pin_signals[13] = SIG_HI
-	
-	idk.pin_signals[0] = SIG_LO
-	print(idk.pin_signals[0])
-	print(idk.pin_signals[1])
-
-	idk.process_inputs()
-
-	print(idk.pin_signals[0])
-	print(idk.pin_signals[1])
 
 
 func _process(delta: float) -> void:
@@ -58,7 +40,8 @@ func _process(delta: float) -> void:
 
 	## devices (ICs, LEDs, etc.) will accept inputs
 	## devices (ICs, LEDs, etc.) will process
-	## clear all wire signals
+
+	# Clear all wire signals.
 	for conn in conns:
 		conn.sig = SIG_UNKNOWN
 
