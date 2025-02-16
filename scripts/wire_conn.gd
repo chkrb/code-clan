@@ -15,7 +15,7 @@ func _ready() -> void:
 	var p1_global = p1 * pin_grid.pin_cell_size + pin_grid.pin_cell_size / 2
 	var p2_global = p2 * pin_grid.pin_cell_size + pin_grid.pin_cell_size / 2
 	# Connecting line.
-	line.default_color = Color(0, 0, 0, 0.5)
+	line.default_color = Color(1, 1, 1, 0.5)
 	line.width = 4
 	line.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	line.end_cap_mode = Line2D.LINE_CAP_ROUND
@@ -23,7 +23,7 @@ func _ready() -> void:
 	line.add_point(p2_global)
 	add_child(line)
 	# Connection endpoint 1.
-	epoint1.default_color = Color(0, 0, 0, 0.5)
+	epoint1.default_color = Color(1, 1, 1, 0.5)
 	epoint1.width = 15
 	epoint1.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	epoint1.end_cap_mode = Line2D.LINE_CAP_ROUND
@@ -31,7 +31,7 @@ func _ready() -> void:
 	epoint1.add_point(p1_global + Vector2i(1, 0))
 	add_child(epoint1)
 	# Connection endpoint 2.
-	epoint2.default_color = Color(0, 0, 0, 0.5)
+	epoint2.default_color = Color(1, 1, 1, 0.5)
 	epoint2.width = 15
 	epoint2.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	epoint2.end_cap_mode = Line2D.LINE_CAP_ROUND

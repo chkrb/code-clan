@@ -25,6 +25,10 @@ window/size/mode=3
 window/stretch/mode="viewport"
 display_server/driver.linuxbsd="wayland"
 
+[gui]
+
+theme/custom_font="res://fonts/JetBrainsMono-Regular.ttf"
+
 [input]
 
 left={
@@ -58,7 +62,7 @@ down={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(1, 1, 1, 1)
+environment/defaults/default_clear_color=Color(0.0627451, 0.0627451, 0.0627451, 1)
 anti_aliasing/quality/msaa_2d=1
 
 [run]

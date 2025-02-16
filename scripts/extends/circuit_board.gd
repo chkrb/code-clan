@@ -24,7 +24,7 @@ func join(p1: Vector2i, p2: Vector2i) -> void:
 
 func _ready() -> void:
 	temp_conn.name = "TempConn"
-	temp_conn.default_color = Color(0, 0, 0, 0.25)
+	temp_conn.default_color = Color(1, 1, 1, 0.25)
 	temp_conn.width = 5
 	temp_conn.visible = false
 	temp_conn.begin_cap_mode = Line2D.LINE_CAP_ROUND

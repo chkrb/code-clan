@@ -46,12 +46,6 @@ offset_right = 300.0
 offset_bottom = 1080.0
 script = ExtResource("4_051ug")
 
-[node name="ColorRect" type="ColorRect" parent="Control/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0.712129, 0.712129, 0.712129, 1)
-
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -67,5 +61,11 @@ item_1/text = "circuit 2"
 item_1/icon = ExtResource("5_rescr")
 item_2/text = "circuit 3"
 item_2/icon = ExtResource("5_rescr")
+
+[node name="ColorRect" type="ColorRect" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.712129, 0.712129, 0.712129, 1)
 
 [connection signal="item_activated" from="Control/ScrollContainer/VBoxContainer/ItemList" to="Control/ScrollContainer/VBoxContainer/ItemList" method="_on_item_activated"]

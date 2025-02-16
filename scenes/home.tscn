@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cf2pvg13fa3mc"]
+[gd_scene load_steps=14 format=3 uid="uid://cf2pvg13fa3mc"]
 
 [ext_resource type="Script" path="res://scripts/custom_button.gd" id="1_imtfy"]
 [ext_resource type="Script" path="res://scripts/exit_button.gd" id="1_te4mg"]
+[ext_resource type="Theme" uid="uid://ddbar6ei37mnt" path="res://fonts/theme_Default.tres" id="2_gy4yn"]
 [ext_resource type="Script" path="res://scripts/preset_button.gd" id="2_niyjf"]
+[ext_resource type="Texture2D" uid="uid://brdkdjh670snb" path="res://images/fill.png" id="4_roaji"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_s528c"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_wl1di"]
 device = -1
@@ -34,44 +38,67 @@ events = [SubResource("InputEventKey_pvluk"), SubResource("InputEventKey_rf8l6")
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Fill" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("4_roaji")
+centered = false
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
+[node name="Background" type="TextureRect" parent="Control"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ImageTexture_s528c")
+
+[node name="Title" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 158.0
+offset_right = 1511.0
+offset_bottom = 406.0
+theme = ExtResource("2_gy4yn")
+theme_override_font_sizes/font_size = 200
+text = "CONNECTIONS"
+
 [node name="PresetButton" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 320.0
-offset_top = 390.0
-offset_right = 620.0
-offset_bottom = 690.0
-tooltip_text = "Create a Custom Circuit"
-theme_override_font_sizes/font_size = 70
+offset_left = 1435.0
+offset_top = 763.0
+offset_right = 1785.0
+offset_bottom = 810.0
+tooltip_text = "Explore Prebuilt Projects"
+theme = ExtResource("2_gy4yn")
+theme_override_font_sizes/font_size = 30
 shortcut = SubResource("Shortcut_io33u")
-text = "Presets"
+text = "Prototyped Projects"
 script = ExtResource("2_niyjf")
 
 [node name="CustomButton" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 820.0
-offset_top = 390.0
-offset_right = 1120.0
-offset_bottom = 690.0
+offset_left = 1597.0
+offset_top = 842.0
+offset_right = 1770.0
+offset_bottom = 892.0
 tooltip_text = "Create a Custom Circuit"
-theme_override_font_sizes/font_size = 70
+theme = ExtResource("2_gy4yn")
+theme_override_font_sizes/font_size = 30
 shortcut = SubResource("Shortcut_6es0i")
-text = "Custom"
+text = "Playground"
 script = ExtResource("1_imtfy")
 
 [node name="ExitButton" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 1300.0
-offset_top = 390.0
-offset_right = 1600.0
-offset_bottom = 690.0
+offset_left = 1705.0
+offset_top = 915.0
+offset_right = 1785.0
+offset_bottom = 965.0
 tooltip_text = "Exit Application"
-theme_override_font_sizes/font_size = 100
+theme = ExtResource("2_gy4yn")
+theme_override_font_sizes/font_size = 30
 shortcut = SubResource("Shortcut_cgqdp")
 text = "Exit"
 script = ExtResource("1_te4mg")
