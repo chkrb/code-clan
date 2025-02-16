@@ -30,6 +30,14 @@ func _ready() -> void:
 	temp_conn.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	temp_conn.end_cap_mode = Line2D.LINE_CAP_ROUND
 	add_child(temp_conn)
+	
+	var a := DeviceLED.new()
+	a.set_top_left(Vector2i(2, 2))
+	add_child(a)
+	
+	var b := DeviceLED.new()
+	b.set_top_left(Vector2i(9, 10))
+	add_child(b)
 
 
 func _process(delta: float) -> void:
@@ -43,10 +51,22 @@ func _process(delta: float) -> void:
 		if pin is Pin:
 			pin.sig_set = false
 
-	## devices (ICs, LEDs, etc.) will input
-	## devices (ICs, LEDs, etc.) will output
+	# Devices retrieve pin signals as inputs.
+	for dev in get_children():
+		if dev is CircuitDevice:
+			dev.pin_inputs()
 
-	## load device output to wires and propagate them
+	# Devices process pin inputs to generate outputs.
+	for dev in get_children():
+		if dev is CircuitDevice:
+			dev.pin_process()
+
+	# Device outputs are transferred to the pin they're connected to.
+	for dev in get_children():
+		if dev is CircuitDevice:
+			dev.pin_outputs()
+
+	# Propagate pin signals through wires.
 	for pin in $"/root/Node2D/Control/PinGrid".get_children():
 		if pin is Pin:
 			pin.set_sig(pin.sig)
