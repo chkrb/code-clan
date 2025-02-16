@@ -25,6 +25,10 @@ window/size/mode=3
 window/stretch/mode="viewport"
 display_server/driver.linuxbsd="wayland"
 
+[rendering]
+
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)
+
 [run]
 
 platforms/linuxbsd/prefer_wayland=true
