@@ -14,9 +14,9 @@ var pin_wires: Array[WireConn] = []
 
 
 func set_coords(c: Vector2i) -> void:
-	self.coords = c
-	self.name = "PinContainer" + str(c.x) + "x" + str(c.y)
-	
+	coords = c
+	name = "PinContainer" + str(c.x) + "x" + str(c.y)
+
 
 func set_sig(new_sig: int) -> void:
 	if sig_set or new_sig not in [SIG_HI, SIG_LO]:
