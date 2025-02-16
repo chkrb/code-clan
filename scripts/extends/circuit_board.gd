@@ -50,3 +50,12 @@ func _process(delta: float) -> void:
 	for pin in $"/root/Node2D/Control/PinGrid".get_children():
 		if pin is Pin:
 			pin.set_sig(pin.sig)
+
+
+func _input(event):
+	if event is not InputEventMouseButton:
+		return
+	if not temp_conn.visible:
+		return
+	if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		temp_conn.hide()

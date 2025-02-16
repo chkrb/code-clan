@@ -1,17 +1,20 @@
-[gd_scene load_steps=6 format=4 uid="uid://bnji7jx6ju21f"]
+[gd_scene load_steps=9 format=4 uid="uid://bnji7jx6ju21f"]
 
-[ext_resource type="Texture2D" uid="uid://cqa4plw03kvie" path="res://images/dotmattile.png" id="1_pwlne"]
-[ext_resource type="Script" path="res://scripts/extends/circuit_board.gd" id="2_rc1b1"]
-[ext_resource type="Script" path="res://scripts/extends/pin_grid.gd" id="3_0u4rn"]
+[ext_resource type="Texture2D" uid="uid://cqa4plw03kvie" path="res://images/dotmattile.png" id="1_a45xb"]
+[ext_resource type="Script" path="res://scripts/extends/circuit_board.gd" id="2_teqho"]
+[ext_resource type="Script" path="res://scripts/extends/pin_grid.gd" id="3_ah3jx"]
+[ext_resource type="Script" path="res://scripts/scroll_container.gd" id="4_esmlg"]
+[ext_resource type="Texture2D" uid="uid://c35b2xdn8hsaw" path="res://icon.svg" id="5_otg3i"]
+[ext_resource type="Script" path="res://scripts/item_list.gd" id="6_2qiaj"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_arx3a"]
-texture = ExtResource("1_pwlne")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_etbpo"]
+texture = ExtResource("1_a45xb")
 texture_region_size = Vector2i(60, 60)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ucrfl"]
 tile_size = Vector2i(40, 40)
-sources/0 = SubResource("TileSetAtlasSource_arx3a")
+sources/0 = SubResource("TileSetAtlasSource_etbpo")
 
 [node name="Node2D" type="Node2D"]
 
@@ -22,7 +25,7 @@ tile_set = SubResource("TileSet_ucrfl")
 rendering_quadrant_size = 100
 
 [node name="CircuitBoard" type="Node2D" parent="."]
-script = ExtResource("2_rc1b1")
+script = ExtResource("2_teqho")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -36,4 +39,29 @@ offset_right = 60.0
 offset_bottom = 60.0
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
-script = ExtResource("3_0u4rn")
+script = ExtResource("3_ah3jx")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 1080.0
+script = ExtResource("4_esmlg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemList" type="ItemList" parent="Control/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 3
+item_0/text = "ic 1"
+item_0/icon = ExtResource("5_otg3i")
+item_1/text = "ic 2"
+item_1/icon = ExtResource("5_otg3i")
+item_2/text = "ic 3"
+item_2/icon = ExtResource("5_otg3i")
+script = ExtResource("6_2qiaj")
+
+[connection signal="item_activated" from="Control/ScrollContainer/VBoxContainer/ItemList" to="Control/ScrollContainer/VBoxContainer/ItemList" method="_on_item_activated"]

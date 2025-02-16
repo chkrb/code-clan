@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://cf2pvg13fa3mc"]
+
+[ext_resource type="Script" path="res://scripts/custom_button.gd" id="1_imtfy"]
+[ext_resource type="Script" path="res://scripts/exit_button.gd" id="1_te4mg"]
+[ext_resource type="Script" path="res://scripts/preset_button.gd" id="2_niyjf"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_wl1di"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_io33u"]
+events = [SubResource("InputEventKey_wl1di")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_mbrh8"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_6es0i"]
+events = [SubResource("InputEventKey_mbrh8")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_pvluk"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="InputEventKey" id="InputEventKey_rf8l6"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_cgqdp"]
+events = [SubResource("InputEventKey_pvluk"), SubResource("InputEventKey_rf8l6")]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="PresetButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 390.0
+offset_right = 620.0
+offset_bottom = 690.0
+tooltip_text = "Create a Custom Circuit"
+theme_override_font_sizes/font_size = 70
+shortcut = SubResource("Shortcut_io33u")
+text = "Presets"
+script = ExtResource("2_niyjf")
+
+[node name="CustomButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 820.0
+offset_top = 390.0
+offset_right = 1120.0
+offset_bottom = 690.0
+tooltip_text = "Create a Custom Circuit"
+theme_override_font_sizes/font_size = 70
+shortcut = SubResource("Shortcut_6es0i")
+text = "Custom"
+script = ExtResource("1_imtfy")
+
+[node name="ExitButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1300.0
+offset_top = 390.0
+offset_right = 1600.0
+offset_bottom = 690.0
+tooltip_text = "Exit Application"
+theme_override_font_sizes/font_size = 100
+shortcut = SubResource("Shortcut_cgqdp")
+text = "Exit"
+script = ExtResource("1_te4mg")
+
+[connection signal="pressed" from="Control/PresetButton" to="Control/PresetButton" method="_on_pressed"]
+[connection signal="pressed" from="Control/CustomButton" to="Control/CustomButton" method="_on_pressed"]
+[connection signal="pressed" from="Control/ExitButton" to="Control/ExitButton" method="_on_pressed"]

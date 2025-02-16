@@ -16,7 +16,7 @@ func _ready() -> void:
 	var p2_global = p2 * pin_grid.pin_cell_size + pin_grid.pin_cell_size / 2
 	# Connecting line.
 	line.default_color = Color(0, 0, 0, 0.5)
-	line.width = 5
+	line.width = 4
 	line.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	line.end_cap_mode = Line2D.LINE_CAP_ROUND
 	line.add_point(p1_global)
