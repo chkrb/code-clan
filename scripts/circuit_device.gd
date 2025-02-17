@@ -5,7 +5,7 @@ const SIG_LO := 0
 const SIG_HI := ~0
 const SIG_UNKNOWN := 1
 
-@onready var pin_cell_size: Vector2i = Vector2i(40, 40) #$"/root/Node2D/GridMap".tile_set.tile_size
+@onready var pin_cell_size: Vector2i = $"/root/Node2D/GridMap".tile_set.tile_size
 var placed := false
 
 var config := ConfigFile.new()
