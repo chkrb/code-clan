@@ -6,6 +6,7 @@ const SIG_HI := ~0
 const SIG_UNKNOWN := 1
 
 @onready var pin_cell_size: Vector2i = Vector2i(40, 40) #$"/root/Node2D/GridMap".tile_set.tile_size
+var placed := false
 
 var config := ConfigFile.new()
 var cfg_name := ""
@@ -150,4 +151,4 @@ func _input(event):
 
 
 func place_device() -> void:
-	$CharacterBody2D.placed = true
+	placed = true
