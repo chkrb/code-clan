@@ -12,6 +12,11 @@ const SIG_UNKNOWN = 1
 var conns: Array[WireConn] = []
 var devs: Array[CircuitDevice] = []
 
+# Load the base device class from scene.
+const device := preload("res://scenes/nodes/circuit_device.tscn")
+
+
+
 func join(p1: Vector2i, p2: Vector2i) -> void:
 	if p1 == p2:
 		return
@@ -32,17 +37,32 @@ func _ready() -> void:
 	add_child(temp_conn)
 	
 	var a := DeviceLED.new()
-	a.set_top_left(Vector2i(2, 2))
+	a.set_top_left(Vector2i(35, 20))
 	add_child(a)
 	
 	var b := DeviceLED.new()
-	b.set_top_left(Vector2i(15, 15))
+	b.set_top_left(Vector2i(40, 20))
 	add_child(b)
 	
 	var c := DeviceIC.new()
-	c.load_cfg("7404")
-	c.set_top_left(Vector2i(5, 5))
+	c.load_cfg("7486")
+	c.set_top_left(Vector2i(5, 9))
 	add_child(c)
+	
+	var d := DeviceIC.new()
+	d.load_cfg("7408")
+	d.set_top_left(Vector2i(15, 9))
+	add_child(d)
+	
+	var e := DeviceIC.new()
+	e.load_cfg("7432")
+	e.set_top_left(Vector2i(25, 9))
+	add_child(e)
+	
+	# var dev := device.instantiate()
+	# dev.load_cfg("7404")
+	# dev.set_top_left(Vector2i(20, 20))
+	# add_child(dev)
 
 
 func _process(delta: float) -> void:

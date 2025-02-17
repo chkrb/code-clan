@@ -5,6 +5,8 @@ const SIG_LO := 0
 const SIG_HI := ~0
 const SIG_UNKNOWN := 1
 
+@onready var pin_cell_size: Vector2i = Vector2i(40, 40) #$"/root/Node2D/GridMap".tile_set.tile_size
+
 var config := ConfigFile.new()
 var cfg_name := ""
 var top_left := Vector2i(0, 0)
@@ -21,10 +23,6 @@ var gnd_idx := -1
 var vcc_idx := -1
 
 
-func set_top_left(pos: Vector2i) -> void:
-	self.top_left = pos
-
-
 func _get_pin_sig(c: Vector2i) -> int:
 	var pin = get_node(
 		"/root/Node2D/Control/PinGrid/PinContainer" + str(c.x) + "x" + str(c.y)
@@ -39,7 +37,7 @@ func _set_pin_sig(c: Vector2i, sig: int) -> void:
 	pin.sig = sig
 
 
-func _load(cfg: String) -> void:
+func load_cfg(cfg: String) -> void:
 	config.load("res://devices/" + cfg + ".ini")
 
 	# The first section contains the name of the device.
@@ -68,6 +66,11 @@ func _load(cfg: String) -> void:
 
 func _working() -> bool:
 	return pin_signals[gnd_idx] == SIG_LO and pin_signals[vcc_idx] == SIG_HI
+
+
+func set_top_left(pos: Vector2i) -> void:
+	self.top_left = pos
+	position = pos * pin_cell_size + pin_cell_size / 2
 
 
 func pin_inputs() -> void:
