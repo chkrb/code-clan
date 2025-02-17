@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnji7jx6ju21f"]
+[gd_scene load_steps=5 format=3 uid="uid://bnji7jx6ju21f"]
 
 [ext_resource type="Script" path="res://scripts/extends/circuit_board.gd" id="2_teqho"]
 [ext_resource type="Script" path="res://scripts/extends/pin_grid.gd" id="3_ah3jx"]
-[ext_resource type="Script" path="res://scripts/scroll_container.gd" id="4_esmlg"]
-[ext_resource type="Texture2D" uid="uid://c35b2xdn8hsaw" path="res://icon.svg" id="5_otg3i"]
-[ext_resource type="Script" path="res://scripts/item_list.gd" id="6_2qiaj"]
+[ext_resource type="Script" path="res://scripts/scroll_container.gd" id="3_y7e6g"]
+[ext_resource type="Script" path="res://scripts/item_list.gd" id="4_gr17f"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -36,7 +35,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 300.0
 offset_bottom = 1080.0
-script = ExtResource("4_esmlg")
+script = ExtResource("3_y7e6g")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollControl/ScrollContainer"]
 layout_mode = 2
@@ -46,13 +45,6 @@ size_flags_vertical = 3
 [node name="ItemList" type="ItemList" parent="ScrollControl/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-item_count = 3
-item_0/text = "ic 1"
-item_0/icon = ExtResource("5_otg3i")
-item_1/text = "ic 2"
-item_1/icon = ExtResource("5_otg3i")
-item_2/text = "ic 3"
-item_2/icon = ExtResource("5_otg3i")
-script = ExtResource("6_2qiaj")
+script = ExtResource("4_gr17f")
 
 [connection signal="item_activated" from="ScrollControl/ScrollContainer/VBoxContainer/ItemList" to="ScrollControl/ScrollContainer/VBoxContainer/ItemList" method="_on_item_activated"]

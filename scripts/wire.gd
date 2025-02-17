@@ -1,4 +1,4 @@
-class_name WireConn
+class_name Wire
 extends Node2D
 
 # TODO: get size from %PinGrid.pin_cell_size

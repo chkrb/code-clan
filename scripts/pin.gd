@@ -13,7 +13,7 @@ var sig := SIG_UNKNOWN
 var sig_const := false
 var sig_set := false
 
-var pin_wires: Array[WireConn] = []
+var pin_wires: Array[Wire] = []
 
 
 func set_coords(c: Vector2i) -> void:

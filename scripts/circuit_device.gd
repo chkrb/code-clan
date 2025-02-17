@@ -220,8 +220,6 @@ func _process(delta: float) -> void:
 
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ENTER:
-		place_device()
-
-
-func place_device() -> void:
-	placed = true
+		placed = true
+		print(top_left)
+		print(_working())

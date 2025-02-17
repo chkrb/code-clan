@@ -9,18 +9,14 @@ const SIG_UNKNOWN = 1
 @onready var temp_conn := Line2D.new()
 @onready var temp_conn_owner_coords := Vector2i(-1, -1)
 
-var conns: Array[WireConn] = []
+var conns: Array[Wire] = []
 var devs: Array[CircuitDevice] = []
-
-# Load the base device class from scene.
-const device := preload("res://scenes/nodes/circuit_device.tscn")
-
 
 
 func join(p1: Vector2i, p2: Vector2i) -> void:
 	if p1 == p2:
 		return
-	var conn := WireConn.new()
+	var conn := Wire.new()
 	conn.p1 = p1
 	conn.p2 = p2
 	add_child(conn)
@@ -35,36 +31,6 @@ func _ready() -> void:
 	temp_conn.begin_cap_mode = Line2D.LINE_CAP_ROUND
 	temp_conn.end_cap_mode = Line2D.LINE_CAP_ROUND
 	add_child(temp_conn)
-	
-	var a := device.instantiate()
-	a.load_cfg("LED")
-	a.set_top_left(Vector2i(35, 20))
-	add_child(a)
-	a.placed = true
-	
-	var b := device.instantiate()
-	b.load_cfg("LED")
-	b.set_top_left(Vector2i(40, 20))
-	add_child(b)
-	b.placed = true
-	
-	var c := device.instantiate()
-	c.load_cfg("7486")
-	c.set_top_left(Vector2i(5, 9))
-	add_child(c)
-	c.placed = true
-	
-	var d := device.instantiate()
-	d.load_cfg("7408")
-	d.set_top_left(Vector2i(15, 9))
-	add_child(d)
-	d.placed = true
-	
-	var e := device.instantiate()
-	e.load_cfg("7432")
-	e.set_top_left(Vector2i(25, 9))
-	add_child(e)
-	e.placed = true
 
 
 func _process(delta: float) -> void:
