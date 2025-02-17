@@ -15,7 +15,7 @@ var pin_names: PackedStringArray = []
 var pin_signals: PackedInt32Array = []
 
 # r0 to r7 general-purpose registers.
-var gpr := [0, 0, 0, 0, 0, 0, 0, 0]
+var gpr: PackedInt32Array = [0, 0, 0, 0, 0, 0, 0, 0]
 
 var gnd_idx := -1
 var vcc_idx := -1
@@ -71,19 +71,15 @@ func _working() -> bool:
 
 
 func pin_inputs() -> void:
-	var bot_right := top_left + device_size
-	var half_pins := len(pin_names) / 2
+	var pin_y := 0
 	for i in range(0, len(pin_names)):
 		# Left side pins - move down from top-left.
-		if i < half_pins:
-			pin_signals[i] = _get_pin_sig(top_left + Vector2i(0, i + 1))
-			#print(pin_signals[i])
-			#print(top_left + Vector2i(0, i + 1))
+		if i < len(pin_names) / 2:
+			pin_y += 1
+			pin_signals[i] = _get_pin_sig(top_left + Vector2i(0, pin_y))
 		else:
-			pin_signals[i] = _get_pin_sig(bot_right - Vector2i(0, i - half_pins + 1))
-			#print(pin_signals[i])
-			#print(bot_right - Vector2i(0, i - half_pins + 1))
-	#print()
+			pin_signals[i] = _get_pin_sig(top_left + Vector2i(device_size.x, pin_y))
+			pin_y -= 1
 
 
 func pin_process() -> void:
@@ -92,17 +88,6 @@ func pin_process() -> void:
 	for key in config.get_section_keys(cfg_name + ".logic"):
 		var value = config.get_value(cfg_name + ".logic", key)
 		var value_args = Array(value.split(" ", false))
-
-		var out_arr: Array
-		var out_idx: int
-
-		# Get the array element which will store the result.
-		if key.begins_with("p"):  # pins
-			out_arr = pin_signals
-			out_idx = key.trim_prefix("p").to_int() - 1
-		elif key.begins_with("r"):  # registers
-			out_arr = gpr
-			out_idx = key.trim_prefix("r").to_int()
 
 		# Replace pins and registers with their respective values.
 		for i in range(0, len(value_args)):
@@ -134,15 +119,23 @@ func pin_process() -> void:
 
 		# Only one element (that is, the result) should be left.
 		assert(len(value_args) == 1)
-		out_arr[out_idx] = value_args[0]
+		
+		# Get the array element which will store the result.
+		if key.begins_with("p"):  # pins
+			var out_idx := key.trim_prefix("p").to_int() - 1
+			pin_signals[out_idx] = value_args[0]
+		elif key.begins_with("r"):  # registers
+			var out_idx := key.trim_prefix("r").to_int()
+			gpr[out_idx] = value_args[0]
 
 
 func pin_outputs() -> void:
-	var bot_right := top_left + device_size
-	var half_pins := len(pin_names) / 2
+	var pin_y := 0
 	for i in range(0, len(pin_names)):
 		# Left side pins - move down from top-left.
-		if i < half_pins:
-			_set_pin_sig(top_left + Vector2i(0, i + 1), pin_signals[i])
+		if i < len(pin_names) / 2:
+			pin_y += 1
+			_set_pin_sig(top_left + Vector2i(0, pin_y), pin_signals[i])
 		else:
-			_set_pin_sig(bot_right - Vector2i(0, i - half_pins + 1), pin_signals[i])
+			_set_pin_sig(top_left + Vector2i(device_size.x, pin_y), pin_signals[i])
+			pin_y -= 1

@@ -24,9 +24,6 @@ tile_map_data = PackedByteArray("AAACAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAAAAAAA
 tile_set = SubResource("TileSet_ucrfl")
 rendering_quadrant_size = 100
 
-[node name="CircuitBoard" type="Node2D" parent="."]
-script = ExtResource("2_teqho")
-
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -34,7 +31,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PinGrid" type="GridContainer" parent="Control"]
-layout_mode = 0
 offset_right = 60.0
 offset_bottom = 60.0
 theme_override_constants/h_separation = 0
@@ -63,5 +59,8 @@ item_1/icon = ExtResource("5_otg3i")
 item_2/text = "ic 3"
 item_2/icon = ExtResource("5_otg3i")
 script = ExtResource("6_2qiaj")
+
+[node name="CircuitBoard" type="Node2D" parent="."]
+script = ExtResource("2_teqho")
 
 [connection signal="item_activated" from="Control/ScrollContainer/VBoxContainer/ItemList" to="Control/ScrollContainer/VBoxContainer/ItemList" method="_on_item_activated"]

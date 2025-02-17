@@ -40,6 +40,4 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if _working():
-		print("works")
-	#led_sprite.frame = int(_working())
+	pass
