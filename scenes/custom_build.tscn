@@ -31,6 +31,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PinGrid" type="GridContainer" parent="Control"]
+layout_mode = 0
 offset_right = 60.0
 offset_bottom = 60.0
 theme_override_constants/h_separation = 0

@@ -5,6 +5,8 @@ const SIG_LO := 0
 const SIG_HI := ~0
 const SIG_UNKNOWN := 1
 
+var placed = false
+
 var config := ConfigFile.new()
 var cfg_name := ""
 var top_left := Vector2i(0, 0)
@@ -147,4 +149,4 @@ func _input(event):
 
 
 func place_device() -> void:
-	$CharacterBody2D.placed = true
+	placed = true

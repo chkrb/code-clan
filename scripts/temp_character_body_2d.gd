@@ -2,11 +2,10 @@ extends CharacterBody2D
 
 @export var SPEED = 1600
 var moving = false
-var placed = false
 
 
 func _physics_process(_delta):
-	if placed:
+	if get_parent().placed:
 		return
 	var dir = Input.get_vector("left", "right", "up", "down")
 	if dir and moving:
@@ -17,3 +16,4 @@ func _physics_process(_delta):
 	move_and_slide()
 	if dir:
 		moving = true
+		print(get_parent().position - position)
