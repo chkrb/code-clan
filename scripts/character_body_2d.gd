@@ -14,7 +14,5 @@ func _physics_process(_delta):
 		moving = false
 	if dir:
 		moving = true
-	if dir.x:
-		get_parent().position.x += dir.x * MOVE_LENGTH
-	if dir.y:
-		get_parent().position.y += dir.y * MOVE_LENGTH
+	get_parent().position.x += dir.x * MOVE_LENGTH
+	get_parent().position.y += dir.y * MOVE_LENGTH
