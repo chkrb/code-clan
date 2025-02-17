@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://cg8tneaw0xyt3"]
+[gd_scene load_steps=11 format=4 uid="uid://cg8tneaw0xyt3"]
 
 [ext_resource type="Texture2D" uid="uid://cqa4plw03kvie" path="res://images/dotmattile.png" id="1_6omjx"]
 [ext_resource type="Script" path="res://scripts/extends/circuit_board.gd" id="2_4j3gd"]
 [ext_resource type="Script" path="res://scripts/extends/pin_grid.gd" id="3_frmhd"]
 [ext_resource type="Script" path="res://scripts/scroll_container.gd" id="4_yre01"]
-[ext_resource type="Texture2D" uid="uid://c35b2xdn8hsaw" path="res://icon.svg" id="5_7kvft"]
 [ext_resource type="Script" path="res://scripts/item_list.gd" id="6_fnhrs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_etbpo"]
@@ -71,13 +70,13 @@ size_flags_vertical = 3
 [node name="ItemList" type="ItemList" parent="Control/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-item_count = 3
-item_0/text = "ic 1"
-item_0/icon = ExtResource("5_7kvft")
-item_1/text = "ic 2"
-item_1/icon = ExtResource("5_7kvft")
-item_2/text = "ic 3"
-item_2/icon = ExtResource("5_7kvft")
+item_count = 6
+item_0/text = "7404"
+item_1/text = "7408"
+item_2/text = "7432"
+item_3/text = "7483"
+item_4/text = "7486"
+item_5/text = "LED"
 script = ExtResource("6_fnhrs")
 
 [node name="BackButton" type="Button" parent="Control"]
@@ -86,6 +85,7 @@ offset_left = 1820.0
 offset_top = 980.0
 offset_right = 1920.0
 offset_bottom = 1080.0
+tooltip_text = "Return to Home Screen"
 theme_override_font_sizes/font_size = 35
 shortcut = SubResource("Shortcut_2gtv5")
 text = "Back"
