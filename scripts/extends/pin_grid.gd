@@ -7,8 +7,7 @@ const SIG_UNKNOWN = 1
 # Apparent screen size: 1920x1080
 # Pin cell size: Extracted from GridMap's TileSet
 @onready var screen_size := DisplayServer.screen_get_size()
-@onready var pin_cell_size: Vector2i = $"/root/Node2D/GridMap".tile_set.tile_size
-@onready var pin_dims := screen_size / pin_cell_size
+@onready var pin_cell_size := Vector2i(40, 40)
 
 
 func _power_rail_line(color: Color, y: int) -> void:
@@ -20,6 +19,8 @@ func _power_rail_line(color: Color, y: int) -> void:
 	add_child(line)
 
 func _ready() -> void:
+	var pin_dims := screen_size / pin_cell_size
+	
 	# Line highlighting the power rails.
 	_power_rail_line(Color(1, 0, 0, 0.5), pin_cell_size.y * 0.5)
 	_power_rail_line(Color(0, 0, 1, 0.5), pin_cell_size.y * 1.5)

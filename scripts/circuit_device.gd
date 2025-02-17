@@ -5,7 +5,9 @@ const SIG_LO := 0
 const SIG_HI := ~0
 const SIG_UNKNOWN := 1
 
-@onready var pin_cell_size: Vector2i = $"/root/Node2D/GridMap".tile_set.tile_size
+# TODO: get size from %PinGrid.pin_cell_size
+const pin_cell_size := Vector2i(40, 40)
+
 var placed := false
 
 var config := ConfigFile.new()
@@ -82,6 +84,8 @@ func set_top_left(pos: Vector2i) -> void:
 
 
 func pin_inputs() -> void:
+	if not placed:
+		return
 	var pin_y := 0
 	for i in range(0, len(pin_names)):
 		# Left side pins - move down from top-left.
@@ -141,6 +145,8 @@ func pin_process() -> void:
 
 
 func pin_outputs() -> void:
+	if not placed:
+		return
 	var pin_y := 0
 	for i in range(0, len(pin_names)):
 		# Left side pins - move down from top-left.
@@ -210,7 +216,6 @@ func _process(delta: float) -> void:
 			if child is Sprite2D:
 				child.frame = int(_working())
 				return
-	
 
 
 func _input(event):

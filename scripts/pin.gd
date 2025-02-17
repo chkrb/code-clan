@@ -5,6 +5,9 @@ const SIG_LO = 0
 const SIG_HI = ~0
 const SIG_UNKNOWN = 1
 
+# TODO: get size from %PinGrid.pin_cell_size
+const pin_cell_size := Vector2i(40, 40)
+
 var coords := Vector2i(-1, -1)
 var sig := SIG_UNKNOWN
 var sig_const := false
@@ -52,16 +55,11 @@ func _ready() -> void:
 
 func _button_pressed():
 	var circuit_board := $"/root/Node2D/CircuitBoard"
-	var pin_grid := $"/root/Node2D/Control/PinGrid"
 	# Toggle visibility.
 	if not circuit_board.temp_conn.visible:
 		circuit_board.temp_conn_owner_coords = coords
 		circuit_board.temp_conn.clear_points()
-		circuit_board.temp_conn.add_point(
-			coords
-			* pin_grid.pin_cell_size
-			+ pin_grid.pin_cell_size / 2
-		)
+		circuit_board.temp_conn.add_point(coords * pin_cell_size + pin_cell_size / 2)
 		circuit_board.temp_conn.visible = true
 	else:
 		circuit_board.join(circuit_board.temp_conn_owner_coords, coords)

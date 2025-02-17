@@ -1,6 +1,9 @@
 class_name WireConn
 extends Node2D
 
+# TODO: get size from %PinGrid.pin_cell_size
+const pin_cell_size := Vector2i(40, 40)
+
 # The two pin locations of connection endpoints.
 var p1 = Vector2i(-1, -1)
 var p2 = Vector2i(-1, -1)
@@ -12,8 +15,8 @@ var epoint2 = Line2D.new()
 
 func _ready() -> void:
 	var pin_grid := $"/root/Node2D/Control/PinGrid"
-	var p1_global = p1 * pin_grid.pin_cell_size + pin_grid.pin_cell_size / 2
-	var p2_global = p2 * pin_grid.pin_cell_size + pin_grid.pin_cell_size / 2
+	var p1_global = p1 * pin_cell_size + pin_cell_size / 2
+	var p2_global = p2 * pin_cell_size + pin_cell_size / 2
 	# Connecting line.
 	line.default_color = Color(0, 0, 0, 0.5)
 	line.width = 4
@@ -47,5 +50,6 @@ func _ready() -> void:
 		"/root/Node2D/Control/PinGrid/PinContainer"
 		+ str(p2.x) + "x" + str(p2.y)
 	)
+	# NOTE: for any wire unloader, make sure to remove these refs!
 	p1_pin.pin_wires.append(self)
 	p2_pin.pin_wires.append(self)
