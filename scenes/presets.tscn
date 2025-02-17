@@ -78,18 +78,13 @@ item_1/icon = ExtResource("5_rescr")
 item_2/text = "circuit 3"
 item_2/icon = ExtResource("5_rescr")
 
-[node name="ColorRect" type="ColorRect" parent="Control/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0.712129, 0.712129, 0.712129, 1)
-
 [node name="BackButton" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 1820.0
 offset_top = 980.0
 offset_right = 1920.0
 offset_bottom = 1080.0
+tooltip_text = "Return to Home Screen"
 theme_override_font_sizes/font_size = 35
 shortcut = SubResource("Shortcut_gi8wy")
 text = "Back"
