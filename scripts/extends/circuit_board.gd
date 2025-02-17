@@ -59,9 +59,9 @@ func _ready() -> void:
 	e.set_top_left(Vector2i(25, 9))
 	add_child(e)
 	
-	# var dev := device.instantiate()
-	# dev.load_cfg("7404")
-	# dev.set_top_left(Vector2i(20, 20))
+	var dev := device.instantiate()
+	dev.load_cfg("7404")
+	dev.set_top_left(Vector2i(20, 20))
 	# add_child(dev)
 
 
