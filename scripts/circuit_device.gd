@@ -14,6 +14,9 @@ var top_left := Vector2i(0, 0)
 var device_size := Vector2i(0, 0)
 
 var description := ""
+var link := ""
+var type := ""
+var texture := ""
 var pin_names: PackedStringArray = []
 var pin_signals: PackedInt32Array = []
 
@@ -28,14 +31,15 @@ func _get_pin_sig(c: Vector2i) -> int:
 	var pin = get_node(
 		"/root/Node2D/Control/PinGrid/PinContainer" + str(c.x) + "x" + str(c.y)
 	)
-	return pin.sig
+	return pin.sig if pin else SIG_UNKNOWN
 
 
 func _set_pin_sig(c: Vector2i, sig: int) -> void:
 	var pin = get_node(
 		"/root/Node2D/Control/PinGrid/PinContainer" + str(c.x) + "x" + str(c.y)
 	)
-	pin.sig = sig
+	if pin:
+		pin.sig = sig
 
 
 func load_cfg(cfg: String) -> void:
@@ -46,6 +50,9 @@ func load_cfg(cfg: String) -> void:
 	name = cfg_name  # attribute 'name' can be changed by Godot.
 	
 	description = config.get_value(cfg_name, "description", "")
+	link = config.get_value(cfg_name, "link", "")
+	type = config.get_value(cfg_name, "type", "")
+	texture = config.get_value(cfg_name, "texture", "")
 
 	while true:
 		var pname = config.get_value(
@@ -143,6 +150,67 @@ func pin_outputs() -> void:
 		else:
 			_set_pin_sig(top_left + Vector2i(device_size.x, pin_y), pin_signals[i])
 			pin_y -= 1
+
+
+func _ready_visual() -> void:
+	# The amount of space (in pin widths) the device takes up.
+	device_size = Vector2i(2, 2)
+
+	var sprite := Sprite2D.new()
+	var pin_grid := $"/root/Node2D/Control/PinGrid"
+	sprite.texture = ImageTexture.create_from_image(Image.load_from_file(
+		"res://images/devices/" + texture
+	))
+	sprite.hframes = 2
+	var frame_size := \
+		sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)
+	sprite.scale = Vector2(device_size * pin_cell_size) / frame_size
+	sprite.centered = false
+	add_child(sprite)
+
+	set_top_left(top_left)
+
+
+func _ready_logical() -> void:
+	# The amount of space (in pin widths) the device takes up.
+	device_size = Vector2i(5, len(pin_names) / 2)
+
+	for i in range(len(pin_names) / 2):
+		var pin_line = Line2D.new()
+		pin_line.default_color = Color(0, 0, 0)
+		pin_line.width = 5
+		pin_line.add_point(Vector2i(0, i + 1) * pin_cell_size)
+		pin_line.add_point(Vector2i(device_size.x, i + 1) * pin_cell_size)
+		add_child(pin_line)
+		
+	var rect = ColorRect.new()
+	rect.color = Color(0, 0, 0)
+	rect.position = pin_cell_size / 2
+	rect.size = (device_size - Vector2i(1, 0)) * pin_cell_size
+	add_child(rect)
+
+	var label := Label.new()
+	label.text = cfg_name
+	label.add_theme_font_size_override("font_size", 32)
+	rect.add_child(label)
+
+	set_top_left(top_left)
+
+
+func _ready() -> void:
+	if type == "Visual":
+		_ready_visual()
+	elif type == "Logical":
+		_ready_logical()
+
+
+func _process(delta: float) -> void:
+	if type == "Visual":
+		for child in get_children():
+			if child is Sprite2D:
+				child.frame = int(_working())
+				return
+	
 
 
 func _input(event):

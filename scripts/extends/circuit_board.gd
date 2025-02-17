@@ -36,33 +36,30 @@ func _ready() -> void:
 	temp_conn.end_cap_mode = Line2D.LINE_CAP_ROUND
 	add_child(temp_conn)
 	
-	var a := DeviceLED.new()
+	var a := device.instantiate()
+	a.load_cfg("LED")
 	a.set_top_left(Vector2i(35, 20))
 	add_child(a)
 	
-	var b := DeviceLED.new()
+	var b := device.instantiate()
+	b.load_cfg("LED")
 	b.set_top_left(Vector2i(40, 20))
 	add_child(b)
 	
-	var c := DeviceIC.new()
+	var c := device.instantiate()
 	c.load_cfg("7486")
 	c.set_top_left(Vector2i(5, 9))
 	add_child(c)
 	
-	var d := DeviceIC.new()
+	var d := device.instantiate()
 	d.load_cfg("7408")
 	d.set_top_left(Vector2i(15, 9))
 	add_child(d)
 	
-	var e := DeviceIC.new()
+	var e := device.instantiate()
 	e.load_cfg("7432")
 	e.set_top_left(Vector2i(25, 9))
 	add_child(e)
-	
-	var dev := device.instantiate()
-	dev.load_cfg("7404")
-	dev.set_top_left(Vector2i(20, 20))
-	# add_child(dev)
 
 
 func _process(delta: float) -> void:
