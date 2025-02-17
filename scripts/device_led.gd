@@ -9,7 +9,7 @@ var led_sprite := Sprite2D.new()
 
 func set_top_left(pos: Vector2i) -> void:
 	super.set_top_left(pos)
-	led_sprite.position = pos * pin_cell_size + pin_cell_size / 2
+	position = pos * pin_cell_size + pin_cell_size / 2
 
 
 func _ready() -> void:

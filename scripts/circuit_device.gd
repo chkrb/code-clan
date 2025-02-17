@@ -77,8 +77,13 @@ func pin_inputs() -> void:
 		# Left side pins - move down from top-left.
 		if i < half_pins:
 			pin_signals[i] = _get_pin_sig(top_left + Vector2i(0, i + 1))
+			#print(pin_signals[i])
+			#print(top_left + Vector2i(0, i + 1))
 		else:
 			pin_signals[i] = _get_pin_sig(bot_right - Vector2i(0, i - half_pins + 1))
+			#print(pin_signals[i])
+			#print(bot_right - Vector2i(0, i - half_pins + 1))
+	#print()
 
 
 func pin_process() -> void:

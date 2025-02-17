@@ -24,7 +24,7 @@ func join(p1: Vector2i, p2: Vector2i) -> void:
 
 func _ready() -> void:
 	temp_conn.name = "TempConn"
-	temp_conn.default_color = Color(1, 1, 1, 0.25)
+	temp_conn.default_color = Color(0, 0, 0, 0.25)
 	temp_conn.width = 5
 	temp_conn.visible = false
 	temp_conn.begin_cap_mode = Line2D.LINE_CAP_ROUND
@@ -36,8 +36,13 @@ func _ready() -> void:
 	add_child(a)
 	
 	var b := DeviceLED.new()
-	b.set_top_left(Vector2i(9, 10))
+	b.set_top_left(Vector2i(15, 15))
 	add_child(b)
+	
+	var c := DeviceIC.new()
+	c.load_cfg("7404")
+	c.set_top_left(Vector2i(5, 5))
+	add_child(c)
 
 
 func _process(delta: float) -> void:

@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cf2pvg13fa3mc"]
+[gd_scene load_steps=13 format=3 uid="uid://cf2pvg13fa3mc"]
 
 [ext_resource type="Script" path="res://scripts/custom_button.gd" id="1_imtfy"]
 [ext_resource type="Script" path="res://scripts/exit_button.gd" id="1_te4mg"]
-[ext_resource type="Theme" uid="uid://ddbar6ei37mnt" path="res://fonts/theme_Default.tres" id="2_gy4yn"]
 [ext_resource type="Script" path="res://scripts/preset_button.gd" id="2_niyjf"]
 [ext_resource type="Texture2D" uid="uid://brdkdjh670snb" path="res://images/fill.png" id="4_roaji"]
 
@@ -50,6 +49,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="Background" type="TextureRect" parent="Control"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("ImageTexture_s528c")
@@ -60,7 +60,6 @@ offset_left = 161.0
 offset_top = 158.0
 offset_right = 1511.0
 offset_bottom = 406.0
-theme = ExtResource("2_gy4yn")
 theme_override_font_sizes/font_size = 200
 text = "CONNECTIONS"
 
@@ -71,7 +70,6 @@ offset_top = 763.0
 offset_right = 1785.0
 offset_bottom = 810.0
 tooltip_text = "Explore Prebuilt Projects"
-theme = ExtResource("2_gy4yn")
 theme_override_font_sizes/font_size = 30
 shortcut = SubResource("Shortcut_io33u")
 text = "Prototyped Projects"
@@ -84,7 +82,6 @@ offset_top = 842.0
 offset_right = 1770.0
 offset_bottom = 892.0
 tooltip_text = "Create a Custom Circuit"
-theme = ExtResource("2_gy4yn")
 theme_override_font_sizes/font_size = 30
 shortcut = SubResource("Shortcut_6es0i")
 text = "Playground"
@@ -97,7 +94,6 @@ offset_top = 915.0
 offset_right = 1785.0
 offset_bottom = 965.0
 tooltip_text = "Exit Application"
-theme = ExtResource("2_gy4yn")
 theme_override_font_sizes/font_size = 30
 shortcut = SubResource("Shortcut_cgqdp")
 text = "Exit"
