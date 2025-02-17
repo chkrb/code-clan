@@ -35,7 +35,7 @@ unicode = 51
 [sub_resource type="Shortcut" id="Shortcut_cgqdp"]
 events = [SubResource("InputEventKey_pvluk"), SubResource("InputEventKey_rf8l6")]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="Fill" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
