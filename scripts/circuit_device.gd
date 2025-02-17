@@ -146,3 +146,12 @@ func pin_outputs() -> void:
 			_set_pin_sig(top_left + Vector2i(0, i + 1), pin_signals[i])
 		else:
 			_set_pin_sig(bot_right - Vector2i(0, i - half_pins + 1), pin_signals[i])
+
+
+func _input(event):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ENTER:
+		place_device()
+
+
+func place_device() -> void:
+	$CharacterBody2D.placed = true
