@@ -87,6 +87,7 @@ theme_override_font_sizes/font_size = 200
 text = "CONNECTIONS"
 
 [node name="PresetButton" type="Button" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 1435.0
 offset_top = 763.0

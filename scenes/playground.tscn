@@ -70,13 +70,6 @@ size_flags_vertical = 3
 [node name="ItemList" type="ItemList" parent="Control/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-item_count = 6
-item_0/text = "7404"
-item_1/text = "7408"
-item_2/text = "7432"
-item_3/text = "7483"
-item_4/text = "7486"
-item_5/text = "LED"
 script = ExtResource("6_fnhrs")
 
 [node name="BackButton" type="Button" parent="Control"]

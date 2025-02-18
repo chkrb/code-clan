@@ -1,6 +1,6 @@
 extends ItemList
 
-const dev_files: PackedStringArray = []
+var dev_files: PackedStringArray = []
 
 # Load the base device class from scene.
 const CIR_DEV = preload("res://scenes/nodes/circuit_device.tscn")
@@ -17,12 +17,11 @@ func _find_dev_files(path):
 
 
 func _ready() -> void:
-	_find_dev_files("res://devices/")
-	dev_files.sort()
+	if not dev_files:
+		_find_dev_files("res://devices/")
+		dev_files.sort()
 
 	for dev_cfg in dev_files:
-		print(dev_cfg)
-		pass  # add entry
 		add_item(dev_cfg)
 
 

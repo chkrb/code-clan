@@ -202,7 +202,7 @@ func _ready_logical() -> void:
 
 	set_top_left(top_left)
 
-
+	
 func _ready() -> void:
 	if type == "Visual":
 		_ready_visual()
@@ -221,5 +221,3 @@ func _process(delta: float) -> void:
 func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ENTER:
 		placed = true
-		print(top_left)
-		print(_working())
